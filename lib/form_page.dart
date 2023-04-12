@@ -36,6 +36,13 @@ class _FormPageState extends State<FormPage> {
           child: Column(
         children: [
           Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(
+              'assets/images/cons.jpeg',
+              width: 320,
+            ),
+          ),
+          Padding(
             padding: const EdgeInsets.all(12.0),
             child: TextFormField(
                 keyboardType: TextInputType.datetime,
@@ -51,7 +58,7 @@ class _FormPageState extends State<FormPage> {
                 style: TextStyle(fontSize: 19, color: Colors.black),
                 decoration: InputDecoration(
                   hintStyle: TextStyle(color: Color.fromARGB(255, 73, 73, 73)),
-                  hintText: 'Data',
+                  hintText: 'Data:',
                   filled: true,
                   hintMaxLines: 2,
                   fillColor: Colors.white,
