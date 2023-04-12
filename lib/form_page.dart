@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:pdf/widgets.dart' as pw;
+import 'package:project_147/pdf_generator.dart';
+
 class FormPage extends StatefulWidget {
   const FormPage({
     Key? key,
@@ -19,12 +22,7 @@ class _FormPageState extends State<FormPage> {
   TextEditingController controllerHorarioFinal = TextEditingController();
   TextEditingController controllerDate = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  bool valueValidator(value) {
-    if (value != null && value.isEmpty) {
-      return true;
-    }
-    return false;
-  }
+ 
 
   int lenghtTime = 5;
 
@@ -55,8 +53,8 @@ class _FormPageState extends State<FormPage> {
                 },
                 onChanged: ((value) {}),
                 controller: controllerDate,
-                style: TextStyle(fontSize: 19, color: Colors.black),
-                decoration: InputDecoration(
+                style: const TextStyle(fontSize: 19, color: Colors.black),
+                decoration: const InputDecoration(
                   hintStyle: TextStyle(color: Color.fromARGB(255, 73, 73, 73)),
                   hintText: 'Data:',
                   filled: true,
@@ -68,17 +66,23 @@ class _FormPageState extends State<FormPage> {
             padding: const EdgeInsets.all(12.0),
             child: TextFormField(
                 validator: (value) {
-                  if (valueValidator(value)) {
-                    return 'Não há informações suficientes';
-                  }
-                  return null;
+                  
+                    
+    if (value != null && value.isEmpty) {
+      return 'Não há informações suficientes';
+    }
+       return null;
+  
+                   
+                  
+               
                 },
                 onChanged: ((value) {}),
                 controller: controllerName,
-                style: TextStyle(fontSize: 24, color: Colors.black),
+                style: const TextStyle(fontSize: 24, color: Colors.black),
                 decoration: InputDecoration(
                     hintStyle:
-                        TextStyle(color: Color.fromARGB(255, 73, 73, 73)),
+                        const TextStyle(color: Color.fromARGB(255, 73, 73, 73)),
                     hintText: 'Operador/Motorista',
                     filled: true,
                     hintMaxLines: 2,
@@ -97,10 +101,10 @@ class _FormPageState extends State<FormPage> {
                 },
                 onChanged: ((value) {}),
                 controller: controllerEquipament,
-                style: TextStyle(fontSize: 24, color: Colors.black),
+                style: const TextStyle(fontSize: 24, color: Colors.black),
                 decoration: InputDecoration(
                     hintStyle:
-                        TextStyle(color: Color.fromARGB(255, 73, 73, 73)),
+                        const TextStyle(color: Color.fromARGB(255, 73, 73, 73)),
                     hintText: 'Equipamento',
                     filled: true,
                     hintMaxLines: 2,
@@ -119,10 +123,10 @@ class _FormPageState extends State<FormPage> {
                 },
                 onChanged: ((value) {}),
                 controller: controllerSigla,
-                style: TextStyle(fontSize: 24, color: Colors.black),
+                style: const TextStyle(fontSize: 24, color: Colors.black),
                 decoration: InputDecoration(
                     hintStyle:
-                        TextStyle(color: Color.fromARGB(255, 73, 73, 73)),
+                        const TextStyle(color: Color.fromARGB(255, 73, 73, 73)),
                     hintText: 'Sigla do Consórcio',
                     filled: true,
                     hintMaxLines: 2,
@@ -142,10 +146,10 @@ class _FormPageState extends State<FormPage> {
                 },
                 onChanged: ((value) {}),
                 controller: controllerHorimetroInicio,
-                style: TextStyle(fontSize: 24, color: Colors.black),
+                style: const TextStyle(fontSize: 24, color: Colors.black),
                 decoration: InputDecoration(
                     hintStyle:
-                        TextStyle(color: Color.fromARGB(255, 73, 73, 73)),
+                        const TextStyle(color: Color.fromARGB(255, 73, 73, 73)),
                     hintText: 'Horímetro Inicial',
                     filled: true,
                     hintMaxLines: 2,
@@ -165,10 +169,10 @@ class _FormPageState extends State<FormPage> {
                 },
                 onChanged: ((value) {}),
                 controller: controllerHorimetroFinal,
-                style: TextStyle(fontSize: 24, color: Colors.black),
+                style: const TextStyle(fontSize: 24, color: Colors.black),
                 decoration: InputDecoration(
                     hintStyle:
-                        TextStyle(color: Color.fromARGB(255, 73, 73, 73)),
+                        const TextStyle(color: Color.fromARGB(255, 73, 73, 73)),
                     hintText: 'Horímetro Final',
                     filled: true,
                     hintMaxLines: 2,
@@ -189,10 +193,10 @@ class _FormPageState extends State<FormPage> {
                 },
                 onChanged: ((value) {}),
                 controller: controllerHorarioIni,
-                style: TextStyle(fontSize: 24, color: Colors.black),
+                style: const TextStyle(fontSize: 24, color: Colors.black),
                 decoration: InputDecoration(
                     hintStyle:
-                        TextStyle(color: Color.fromARGB(255, 73, 73, 73)),
+                        const TextStyle(color: Color.fromARGB(255, 73, 73, 73)),
                     hintText: 'Horário Inicial',
                     filled: true,
                     hintMaxLines: 2,
@@ -213,10 +217,10 @@ class _FormPageState extends State<FormPage> {
                 },
                 onChanged: ((value) {}),
                 controller: controllerHorarioFinal,
-                style: TextStyle(fontSize: 24, color: Colors.black),
+                style: const TextStyle(fontSize: 24, color: Colors.black),
                 decoration: InputDecoration(
                     hintStyle:
-                        TextStyle(color: Color.fromARGB(255, 73, 73, 73)),
+                        const TextStyle(color: Color.fromARGB(255, 73, 73, 73)),
                     hintText: 'Horário Final',
                     filled: true,
                     hintMaxLines: 2,
@@ -230,20 +234,23 @@ class _FormPageState extends State<FormPage> {
               width: 150,
               height: 50,
               child: TextButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {}
+                  onPressed: () async{
+                    if (_formKey.currentState!.validate()) {
+                       final field1 = _formKey.currentState!.value['field1'];
+                      final pdf = await PdfGenerator.generate(name: _formKey.currentState!.value[''], equipament: equipament, sigla: sigla, horimeFinal: horimeFinal, horimeIncio: horimeIncio, horarioFinal: horarioFinal, horarioInicio: horarioInicio, date: date)
+                    }
                   },
-                  child: Text(
-                    'ENVIAR',
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  ),
                   style: ButtonStyle(
                       shape: MaterialStateProperty.all(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18))),
                       side: MaterialStateProperty.all(
-                          BorderSide(width: 2, color: Colors.black)),
+                          const BorderSide(width: 2, color: Colors.black)),
                       backgroundColor: MaterialStateProperty.all(
-                          Color.fromARGB(255, 10, 74, 126)))),
+                          const Color.fromARGB(255, 10, 74, 126))),
+                  child: const Text(
+                    'ENVIAR',
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  )),
             ),
           )
         ],
