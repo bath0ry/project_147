@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pdf/pdf.dart';
 
-import 'package:pdf/widgets.dart' as pw;
+import 'package:pdf/widgets.dart' as pdfLib;
 import 'package:project_147/pdf_generator.dart';
 
 class FormPage extends StatefulWidget {
@@ -22,7 +23,6 @@ class _FormPageState extends State<FormPage> {
   TextEditingController controllerHorarioFinal = TextEditingController();
   TextEditingController controllerDate = TextEditingController();
   final _formKey = GlobalKey<FormState>();
- 
 
   int lenghtTime = 5;
 
@@ -46,7 +46,7 @@ class _FormPageState extends State<FormPage> {
                 keyboardType: TextInputType.datetime,
                 maxLength: 10,
                 validator: (value) {
-                  if (valueValidator(value)) {
+                  if (value != null && value.isEmpty) {
                     return 'Não há informações suficientes';
                   }
                   return null;
@@ -66,16 +66,10 @@ class _FormPageState extends State<FormPage> {
             padding: const EdgeInsets.all(12.0),
             child: TextFormField(
                 validator: (value) {
-                  
-                    
-    if (value != null && value.isEmpty) {
-      return 'Não há informações suficientes';
-    }
-       return null;
-  
-                   
-                  
-               
+                  if (value != null && value.isEmpty) {
+                    return 'Não há informações suficientes';
+                  }
+                  return null;
                 },
                 onChanged: ((value) {}),
                 controller: controllerName,
@@ -94,7 +88,7 @@ class _FormPageState extends State<FormPage> {
             padding: const EdgeInsets.all(12.0),
             child: TextFormField(
                 validator: (value) {
-                  if (valueValidator(value)) {
+                  if (value != null && value.isEmpty) {
                     return 'Não há informações suficientes';
                   }
                   return null;
@@ -116,7 +110,7 @@ class _FormPageState extends State<FormPage> {
             padding: const EdgeInsets.all(12.0),
             child: TextFormField(
                 validator: (value) {
-                  if (valueValidator(value)) {
+                  if (value != null && value.isEmpty) {
                     return 'Não há informações suficientes';
                   }
                   return null;
@@ -139,7 +133,7 @@ class _FormPageState extends State<FormPage> {
             child: TextFormField(
                 keyboardType: TextInputType.number,
                 validator: (value) {
-                  if (valueValidator(value)) {
+                  if (value != null && value.isEmpty) {
                     return 'Não há informações suficientes';
                   }
                   return null;
@@ -162,7 +156,7 @@ class _FormPageState extends State<FormPage> {
             child: TextFormField(
                 keyboardType: TextInputType.number,
                 validator: (value) {
-                  if (valueValidator(value)) {
+                  if (value != null && value.isEmpty) {
                     return 'Não há informações suficientes';
                   }
                   return null;
@@ -186,7 +180,7 @@ class _FormPageState extends State<FormPage> {
                 maxLength: 5,
                 keyboardType: TextInputType.datetime,
                 validator: (value) {
-                  if (valueValidator(value)) {
+                  if (value != null && value.isEmpty) {
                     return 'Não há informações suficientes';
                   }
                   return null;
@@ -210,7 +204,7 @@ class _FormPageState extends State<FormPage> {
                 maxLength: 5,
                 keyboardType: TextInputType.datetime,
                 validator: (value) {
-                  if (valueValidator(value)) {
+                  if (value != null && value.isEmpty) {
                     return 'Não há informações suficientes';
                   }
                   return null;
@@ -234,10 +228,28 @@ class _FormPageState extends State<FormPage> {
               width: 150,
               height: 50,
               child: TextButton(
-                  onPressed: () async{
+                  onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                       final field1 = _formKey.currentState!.value['field1'];
-                      final pdf = await PdfGenerator.generate(name: _formKey.currentState!.value[''], equipament: equipament, sigla: sigla, horimeFinal: horimeFinal, horimeIncio: horimeIncio, horarioFinal: horarioFinal, horarioInicio: horarioInicio, date: date)
+                      final name = controllerName.text;
+                      final equipament = controllerEquipament.text;
+                      final sigla = controllerSigla.text;
+                      final horimeFinal = controllerHorimetroFinal.text;
+                      final horimeInicio = controllerHorimetroInicio.text;
+                      final horarioInicio = controllerHorarioIni.text;
+                      final horarioFinal = controllerHorarioFinal.text;
+                      final date = controllerDate.text;
+
+                      final pdf = await PdfGenerator.generate(
+                          name: name,
+                          equipament: equipament,
+                          sigla: sigla,
+                          horimeFinal: horimeFinal,
+                          horimeInicio: horimeInicio,
+                          horarioFinal: horarioFinal,
+                          horarioInicio: horarioInicio,
+                          date: date);
+                      final file = File('caminho/para/o/arquivo.pdf');
+                      await file.writeAsBytes(pdf.save());
                     }
                   },
                   style: ButtonStyle(
