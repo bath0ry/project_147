@@ -11,7 +11,7 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Center(child: Text('Sua Parte Diária')),
-        backgroundColor: Color.fromARGB(255, 10, 74, 126),
+        backgroundColor: Color.fromARGB(255, 10, 18, 126),
       ),
       body: FormPage(),
     );

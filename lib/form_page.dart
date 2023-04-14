@@ -1,8 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 
-import 'package:pdf/widgets.dart' as pdfLib;
+import 'package:pdf/widgets.dart' as pw;
+import 'package:project_147/division_widget.dart';
 import 'package:project_147/pdf_generator.dart';
+import 'package:open_file/open_file.dart';
 
 class FormPage extends StatefulWidget {
   const FormPage({
@@ -40,6 +45,9 @@ class _FormPageState extends State<FormPage> {
               width: 320,
             ),
           ),
+          DivisionWidget(
+            widthDivison: MediaQuery.of(context).size.width / 2,
+          ),
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: TextFormField(
@@ -51,7 +59,6 @@ class _FormPageState extends State<FormPage> {
                   }
                   return null;
                 },
-                onChanged: ((value) {}),
                 controller: controllerDate,
                 style: const TextStyle(fontSize: 19, color: Colors.black),
                 decoration: const InputDecoration(
@@ -62,6 +69,9 @@ class _FormPageState extends State<FormPage> {
                   fillColor: Colors.white,
                 )),
           ),
+          DivisionWidget(
+            widthDivison: MediaQuery.of(context).size.width,
+          ),
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: TextFormField(
@@ -71,7 +81,6 @@ class _FormPageState extends State<FormPage> {
                   }
                   return null;
                 },
-                onChanged: ((value) {}),
                 controller: controllerName,
                 style: const TextStyle(fontSize: 24, color: Colors.black),
                 decoration: InputDecoration(
@@ -93,7 +102,6 @@ class _FormPageState extends State<FormPage> {
                   }
                   return null;
                 },
-                onChanged: ((value) {}),
                 controller: controllerEquipament,
                 style: const TextStyle(fontSize: 24, color: Colors.black),
                 decoration: InputDecoration(
@@ -115,7 +123,6 @@ class _FormPageState extends State<FormPage> {
                   }
                   return null;
                 },
-                onChanged: ((value) {}),
                 controller: controllerSigla,
                 style: const TextStyle(fontSize: 24, color: Colors.black),
                 decoration: InputDecoration(
@@ -128,6 +135,16 @@ class _FormPageState extends State<FormPage> {
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20)))),
           ),
+          DivisionWidget(
+            widthDivison: MediaQuery.of(context).size.width,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 300, top: 10),
+            child: Text(
+              'Horímetro',
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: TextFormField(
@@ -138,7 +155,6 @@ class _FormPageState extends State<FormPage> {
                   }
                   return null;
                 },
-                onChanged: ((value) {}),
                 controller: controllerHorimetroInicio,
                 style: const TextStyle(fontSize: 24, color: Colors.black),
                 decoration: InputDecoration(
@@ -161,7 +177,6 @@ class _FormPageState extends State<FormPage> {
                   }
                   return null;
                 },
-                onChanged: ((value) {}),
                 controller: controllerHorimetroFinal,
                 style: const TextStyle(fontSize: 24, color: Colors.black),
                 decoration: InputDecoration(
@@ -174,6 +189,16 @@ class _FormPageState extends State<FormPage> {
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20)))),
           ),
+          DivisionWidget(
+            widthDivison: MediaQuery.of(context).size.width,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 300, top: 10),
+            child: Text(
+              'Horário',
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: TextFormField(
@@ -185,7 +210,6 @@ class _FormPageState extends State<FormPage> {
                   }
                   return null;
                 },
-                onChanged: ((value) {}),
                 controller: controllerHorarioIni,
                 style: const TextStyle(fontSize: 24, color: Colors.black),
                 decoration: InputDecoration(
@@ -209,7 +233,6 @@ class _FormPageState extends State<FormPage> {
                   }
                   return null;
                 },
-                onChanged: ((value) {}),
                 controller: controllerHorarioFinal,
                 style: const TextStyle(fontSize: 24, color: Colors.black),
                 decoration: InputDecoration(
@@ -222,6 +245,9 @@ class _FormPageState extends State<FormPage> {
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20)))),
           ),
+          DivisionWidget(
+            widthDivison: MediaQuery.of(context).size.width,
+          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: SizedBox(
@@ -230,26 +256,7 @@ class _FormPageState extends State<FormPage> {
               child: TextButton(
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      final name = controllerName.text;
-                      final equipament = controllerEquipament.text;
-                      final sigla = controllerSigla.text;
-                      final horimeFinal = controllerHorimetroFinal.text;
-                      final horimeInicio = controllerHorimetroInicio.text;
-                      final horarioInicio = controllerHorarioIni.text;
-                      final horarioFinal = controllerHorarioFinal.text;
-                      final date = controllerDate.text;
-
-                      final pdf = await PdfGenerator.generate(
-                          name: name,
-                          equipament: equipament,
-                          sigla: sigla,
-                          horimeFinal: horimeFinal,
-                          horimeInicio: horimeInicio,
-                          horarioFinal: horarioFinal,
-                          horarioInicio: horarioInicio,
-                          date: date);
-                      final file = File('caminho/para/o/arquivo.pdf');
-                      await file.writeAsBytes(pdf.save());
+                      createPdf();
                     }
                   },
                   style: ButtonStyle(
@@ -258,9 +265,9 @@ class _FormPageState extends State<FormPage> {
                       side: MaterialStateProperty.all(
                           const BorderSide(width: 2, color: Colors.black)),
                       backgroundColor: MaterialStateProperty.all(
-                          const Color.fromARGB(255, 10, 74, 126))),
+                          const Color.fromARGB(255, 10, 18, 126))),
                   child: const Text(
-                    'ENVIAR',
+                    'GERAR PDF',
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   )),
             ),
@@ -268,5 +275,39 @@ class _FormPageState extends State<FormPage> {
         ],
       )),
     );
+  }
+
+  Future<void> createPdf() async {
+    final pdf = pw.Document();
+    final image = PdfImage.file(pdf.document,
+        bytes: File('assets/images/cons.jpeg').readAsBytesSync());
+
+    pdf.addPage(
+      pw.Page(build: (context) {
+        return pw
+            .Column(crossAxisAlignment: pw.CrossAxisAlignment.start, children: [
+          pw.Text('Data: ${controllerDate.text}'),
+          pw.Column(
+            crossAxisAlignment: pw.CrossAxisAlignment.start,
+            children: [
+              pw.Text('Operador/Motorista: ${controllerName.text}'),
+              pw.Text('Equipamento: ${controllerEquipament.text}'),
+              pw.Text('Sigla: ${controllerSigla.text}'),
+              pw.Text('Horimetro Inicial: ${controllerHorimetroInicio.text}'),
+              pw.Text('Horimetro Final: ${controllerHorimetroFinal.text}'),
+              pw.Text('Horario Inicial: ${controllerHorarioIni.text}'),
+              pw.Text('Horario Final: ${controllerHorarioFinal.text}'),
+            ],
+          )
+        ]);
+      }),
+    );
+
+    final bytes = await pdf.save();
+    final directory = await getApplicationDocumentsDirectory();
+    final file = File('${directory.path}/parte_diaria.pdf');
+    await file.writeAsBytes(bytes);
+
+    OpenFile.open(file.path);
   }
 }
