@@ -279,8 +279,6 @@ class _FormPageState extends State<FormPage> {
 
   Future<void> createPdf() async {
     final pdf = pw.Document();
-    final image = PdfImage.file(pdf.document,
-        bytes: File('assets/images/cons.jpeg').readAsBytesSync());
 
     pdf.addPage(
       pw.Page(build: (context) {
