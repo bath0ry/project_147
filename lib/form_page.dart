@@ -28,6 +28,8 @@ class _FormPageState extends State<FormPage> {
   TextEditingController controllerHorarioIni = TextEditingController();
   TextEditingController controllerHorarioFinal = TextEditingController();
   TextEditingController controllerDate = TextEditingController();
+  TextEditingController controllerDescri = TextEditingController();
+  TextEditingController controllerParaliz = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   int lenghtTime = 5;
@@ -52,6 +54,7 @@ class _FormPageState extends State<FormPage> {
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: TextFormField(
+                maxLines: 1,
                 keyboardType: TextInputType.datetime,
                 maxLength: 10,
                 validator: (value) {
@@ -66,7 +69,7 @@ class _FormPageState extends State<FormPage> {
                   hintStyle: TextStyle(color: Color.fromARGB(255, 73, 73, 73)),
                   hintText: 'Data:',
                   filled: true,
-                  hintMaxLines: 2,
+                  hintMaxLines: 1,
                   fillColor: Colors.white,
                 )),
           ),
@@ -76,6 +79,7 @@ class _FormPageState extends State<FormPage> {
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: TextFormField(
+                maxLines: 1,
                 validator: (value) {
                   if (value != null && value.isEmpty) {
                     return 'Não há informações suficientes';
@@ -89,7 +93,7 @@ class _FormPageState extends State<FormPage> {
                         const TextStyle(color: Color.fromARGB(255, 73, 73, 73)),
                     hintText: 'Operador/Motorista',
                     filled: true,
-                    hintMaxLines: 2,
+                    hintMaxLines: 1,
                     fillColor: Colors.white,
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(16)))),
@@ -97,6 +101,7 @@ class _FormPageState extends State<FormPage> {
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: TextFormField(
+                maxLines: 1,
                 validator: (value) {
                   if (value != null && value.isEmpty) {
                     return 'Não há informações suficientes';
@@ -110,7 +115,7 @@ class _FormPageState extends State<FormPage> {
                         const TextStyle(color: Color.fromARGB(255, 73, 73, 73)),
                     hintText: 'Equipamento',
                     filled: true,
-                    hintMaxLines: 2,
+                    hintMaxLines: 1,
                     fillColor: Colors.white,
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(16)))),
@@ -118,6 +123,7 @@ class _FormPageState extends State<FormPage> {
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: TextFormField(
+                maxLines: 1,
                 validator: (value) {
                   if (value != null && value.isEmpty) {
                     return 'Não há informações suficientes';
@@ -131,7 +137,7 @@ class _FormPageState extends State<FormPage> {
                         const TextStyle(color: Color.fromARGB(255, 73, 73, 73)),
                     hintText: 'Sigla do Consórcio',
                     filled: true,
-                    hintMaxLines: 2,
+                    hintMaxLines: 1,
                     fillColor: Colors.white,
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(16)))),
@@ -139,8 +145,8 @@ class _FormPageState extends State<FormPage> {
           DivisionWidget(
             widthDivison: MediaQuery.of(context).size.width,
           ),
-          Padding(
-            padding: const EdgeInsets.only(right: 300, top: 10),
+          const Padding(
+            padding: EdgeInsets.only(right: 300, top: 10),
             child: Text(
               'Horímetro',
               style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
@@ -149,6 +155,7 @@ class _FormPageState extends State<FormPage> {
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: TextFormField(
+                maxLines: 1,
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value != null && value.isEmpty) {
@@ -163,7 +170,7 @@ class _FormPageState extends State<FormPage> {
                         const TextStyle(color: Color.fromARGB(255, 73, 73, 73)),
                     hintText: 'Horímetro Inicial',
                     filled: true,
-                    hintMaxLines: 2,
+                    hintMaxLines: 1,
                     fillColor: Colors.white,
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(16)))),
@@ -171,6 +178,7 @@ class _FormPageState extends State<FormPage> {
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: TextFormField(
+                maxLines: 1,
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value != null && value.isEmpty) {
@@ -185,7 +193,7 @@ class _FormPageState extends State<FormPage> {
                         const TextStyle(color: Color.fromARGB(255, 73, 73, 73)),
                     hintText: 'Horímetro Final',
                     filled: true,
-                    hintMaxLines: 2,
+                    hintMaxLines: 1,
                     fillColor: Colors.white,
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(16)))),
@@ -193,8 +201,8 @@ class _FormPageState extends State<FormPage> {
           DivisionWidget(
             widthDivison: MediaQuery.of(context).size.width,
           ),
-          Padding(
-            padding: const EdgeInsets.only(right: 300, top: 10),
+          const Padding(
+            padding: EdgeInsets.only(right: 300, top: 10),
             child: Text(
               'Horário',
               style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
@@ -204,6 +212,7 @@ class _FormPageState extends State<FormPage> {
             padding: const EdgeInsets.all(12.0),
             child: TextFormField(
                 maxLength: 5,
+                maxLines: 1,
                 keyboardType: TextInputType.datetime,
                 validator: (value) {
                   if (value != null && value.isEmpty) {
@@ -218,7 +227,7 @@ class _FormPageState extends State<FormPage> {
                         const TextStyle(color: Color.fromARGB(255, 73, 73, 73)),
                     hintText: 'Horário Inicial',
                     filled: true,
-                    hintMaxLines: 2,
+                    hintMaxLines: 1,
                     fillColor: Colors.white,
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(16)))),
@@ -227,6 +236,7 @@ class _FormPageState extends State<FormPage> {
             padding: const EdgeInsets.all(12.0),
             child: TextFormField(
                 maxLength: 5,
+                maxLines: 1,
                 keyboardType: TextInputType.datetime,
                 validator: (value) {
                   if (value != null && value.isEmpty) {
@@ -241,7 +251,85 @@ class _FormPageState extends State<FormPage> {
                         const TextStyle(color: Color.fromARGB(255, 73, 73, 73)),
                     hintText: 'Horário Final',
                     filled: true,
-                    hintMaxLines: 2,
+                    hintMaxLines: 1,
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(16)))),
+          ),
+          DivisionWidget(
+            widthDivison: MediaQuery.of(context).size.width,
+          ),
+          const Padding(
+            padding: EdgeInsets.only(left: 5, top: 10),
+            child: Text(
+              'Descrição de Serviço:',
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: TextFormField(
+                textAlign: TextAlign.start,
+                maxLines: 10,
+                textDirection: TextDirection.ltr,
+                textAlignVertical: TextAlignVertical.top,
+                autocorrect: true,
+                keyboardType: TextInputType.text,
+                validator: (value) {
+                  if (value != null && value.isEmpty) {
+                    return 'Não há informações suficientes';
+                  }
+                  return null;
+                },
+                controller: controllerDescri,
+                style: const TextStyle(fontSize: 16, color: Colors.black),
+                decoration: InputDecoration(
+                    hintTextDirection: TextDirection.ltr,
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 17, horizontal: 10),
+                    hintStyle:
+                        const TextStyle(color: Color.fromARGB(255, 73, 73, 73)),
+                    hintText: 'Descrição do serviço',
+                    hintMaxLines: 10,
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(16)))),
+          ),
+          DivisionWidget(
+            widthDivison: MediaQuery.of(context).size.width,
+          ),
+          const Padding(
+            padding: EdgeInsets.only(left: 5, top: 10),
+            child: Text(
+              'Paralisações/Deslocamentos:',
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: TextFormField(
+                textAlign: TextAlign.start,
+                maxLines: 10,
+                textDirection: TextDirection.ltr,
+                textAlignVertical: TextAlignVertical.top,
+                autocorrect: true,
+                keyboardType: TextInputType.text,
+                validator: (value) {
+                  if (value != null && value.isEmpty) {
+                    return 'Não há informações suficientes';
+                  }
+                  return null;
+                },
+                controller: controllerParaliz,
+                style: const TextStyle(fontSize: 16, color: Colors.black),
+                decoration: InputDecoration(
+                    hintTextDirection: TextDirection.ltr,
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 17, horizontal: 10),
+                    hintStyle:
+                        const TextStyle(color: Color.fromARGB(255, 73, 73, 73)),
+                    hintText: 'Paralisações/Deslocamentos',
+                    hintMaxLines: 10,
                     fillColor: Colors.white,
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(16)))),
@@ -272,7 +360,7 @@ class _FormPageState extends State<FormPage> {
                     style: TextStyle(color: Colors.white, fontSize: 16),
                   )),
             ),
-          )
+          ),
         ],
       )),
     );
@@ -280,61 +368,129 @@ class _FormPageState extends State<FormPage> {
 
   Future<void> createPdf() async {
     final pdf = pw.Document();
+    final netImage = await networkImage(
+        'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiwpsmcBtOfljvWY-MMXf1lPLYkLJ-144ZHSEdtbP0LTArVAem1nFD_CV2LZUsfNxvwPSXMBSFAauNIEOlRxXkzbLtJfcFMtFGjHVM3US22nUHYrYXmHQOQrDGpQaZx50LXUdRriHWbBbDkx4cIW505ei8Q7uXbdzK8eDAyMUx4orTByet_jyrY25CXPQ/s593/WhatsApp%20Image%202023-04-11%20at%2021.13.11.jpeg');
 
     pdf.addPage(
       pw.Page(build: (pw.Context context) {
         return pw
             .Column(crossAxisAlignment: pw.CrossAxisAlignment.start, children: [
-          pw.Text('Data: ${controllerDate.text}',
-              style:
-                  pw.TextStyle(fontSize: 22, fontWeight: pw.FontWeight.bold)),
-          pw.SizedBox(height: 30),
+          pw.Text('DATA: ${controllerDate.text}',
+              style: pw.TextStyle(fontSize: 17, fontWeight: pw.FontWeight.bold),
+              maxLines: 1),
+          pw.SizedBox(height: 21),
           pw.Center(
-            child: pw.Text('Consórcio SP 147',
-                style:
-                    pw.TextStyle(fontSize: 30, fontWeight: pw.FontWeight.bold)),
+            child: pw.Image(netImage, width: 350, height: 350),
           ),
+          pw.SizedBox(height: 21),
           pw.Column(
             crossAxisAlignment: pw.CrossAxisAlignment.start,
             children: [
-              pw.SizedBox(height: 30),
-              pw.Text('OPERADOR/MOTORISTA: ${controllerName.text}',
-                  style: pw.TextStyle(
-                      fontSize: 16, fontWeight: pw.FontWeight.bold)),
-              pw.SizedBox(height: 10),
-              pw.Text('EQUIPAMENTO: ${controllerEquipament.text}',
-                  style: pw.TextStyle(
-                      fontSize: 16, fontWeight: pw.FontWeight.bold)),
-              pw.SizedBox(height: 10),
-              pw.Text('SIGLA DO CONSÓRCIO: ${controllerSigla.text}',
-                  style: pw.TextStyle(
-                      fontSize: 16, fontWeight: pw.FontWeight.bold)),
-              pw.SizedBox(height: 10),
-              pw.Text('HORÍMETRO INICIAL: ${controllerHorimetroInicio.text}',
-                  style: pw.TextStyle(
-                      fontSize: 16, fontWeight: pw.FontWeight.bold)),
-              pw.Text('HORÍMETRO FINAL: ${controllerHorimetroFinal.text}',
-                  style: pw.TextStyle(
-                      fontSize: 16, fontWeight: pw.FontWeight.bold)),
-              pw.SizedBox(height: 10),
-              pw.Text('HORÁRIO INICIAL: ${controllerHorarioIni.text}',
-                  style: pw.TextStyle(
-                      fontSize: 16, fontWeight: pw.FontWeight.bold)),
-              pw.Text('HORÁRIO FINAL: ${controllerHorarioFinal.text}',
-                  style: pw.TextStyle(
-                      fontSize: 16, fontWeight: pw.FontWeight.bold)),
+              pw.Container(
+                  width: 500,
+                  decoration: pw.BoxDecoration(
+                      border: pw.Border.fromBorderSide(pw.BorderSide(
+                          width: 2, style: pw.BorderStyle.solid))),
+                  child: pw.Column(
+                      crossAxisAlignment: pw.CrossAxisAlignment.start,
+                      children: [
+                        pw.SizedBox(height: 21),
+                        pw.Padding(
+                          padding: pw.EdgeInsets.only(left: 10),
+                          child: pw.Text(
+                            'OPERADOR/MOTORISTA: ${controllerName.text}',
+                            style: pw.TextStyle(
+                                fontSize: 14, fontWeight: pw.FontWeight.bold),
+                            maxLines: 1,
+                          ),
+                        ),
+                        pw.SizedBox(height: 5),
+                        pw.Padding(
+                          padding: pw.EdgeInsets.only(left: 10),
+                          child: pw.Text(
+                              'EQUIPAMENTO: ${controllerEquipament.text}',
+                              style: pw.TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: pw.FontWeight.bold)),
+                        ),
+                        pw.SizedBox(height: 5),
+                        pw.Padding(
+                          padding: pw.EdgeInsets.only(left: 10),
+                          child: pw.Text(
+                            'SIGLA DO CONSÓRCIO: ${controllerSigla.text}',
+                            style: pw.TextStyle(
+                                fontSize: 14, fontWeight: pw.FontWeight.bold),
+                            maxLines: 1,
+                          ),
+                        ),
+                        pw.SizedBox(height: 5),
+                        pw.Padding(
+                          padding: pw.EdgeInsets.only(left: 10),
+                          child: pw.Text(
+                            'HORÍMETRO INICIAL: ${controllerHorimetroInicio.text}',
+                            style: pw.TextStyle(
+                                fontSize: 14, fontWeight: pw.FontWeight.bold),
+                            maxLines: 1,
+                          ),
+                        ),
+                        pw.Padding(
+                          padding: pw.EdgeInsets.only(left: 10),
+                          child: pw.Text(
+                            'HORÍMETRO FINAL: ${controllerHorimetroFinal.text}',
+                            style: pw.TextStyle(
+                                fontSize: 14, fontWeight: pw.FontWeight.bold),
+                            maxLines: 1,
+                          ),
+                        ),
+                        pw.SizedBox(height: 5),
+                        pw.Padding(
+                          padding: pw.EdgeInsets.only(left: 10),
+                          child: pw.Text(
+                            'HORÁRIO INICIAL: ${controllerHorarioIni.text}',
+                            style: pw.TextStyle(
+                                fontSize: 14, fontWeight: pw.FontWeight.bold),
+                            maxLines: 1,
+                          ),
+                        ),
+                        pw.Padding(
+                          padding: pw.EdgeInsets.only(left: 10),
+                          child: pw.Text(
+                            'HORÁRIO FINAL: ${controllerHorarioFinal.text}',
+                            style: pw.TextStyle(
+                                fontSize: 14, fontWeight: pw.FontWeight.bold),
+                            maxLines: 1,
+                          ),
+                        ),
+                        pw.SizedBox(height: 16),
+                        pw.Center(
+                            child: pw.Text('DESCRIÇÃO DO SERVIÇO:',
+                                style: pw.TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: pw.FontWeight.bold))),
+                        pw.Padding(
+                          padding: pw.EdgeInsets.only(left: 10, right: 10),
+                          child: pw.Text('${controllerDescri.text}',
+                              style: pw.TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: pw.FontWeight.bold)),
+                        ),
+                        pw.SizedBox(height: 16),
+                        pw.Center(
+                            child: pw.Text('PARALISAÇÃO/DESLOCAMENTO:',
+                                style: pw.TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: pw.FontWeight.bold))),
+                        pw.Padding(
+                          padding: pw.EdgeInsets.only(
+                              left: 10, right: 10, bottom: 10),
+                          child: pw.Text('${controllerParaliz.text}',
+                              style: pw.TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: pw.FontWeight.bold)),
+                        ),
+                      ])),
             ],
           ),
-          pw.SizedBox(height: 18),
-          pw.Center(
-              child: pw.Text('DESCRIÇÃO DO SERVIÇO:',
-                  style: pw.TextStyle(
-                      fontSize: 21, fontWeight: pw.FontWeight.bold))),
-          pw.SizedBox(height: 20),
-          pw.Center(
-              child: pw.Text('PARALISAÇÃO/DESLOCAMENTO:',
-                  style: pw.TextStyle(
-                      fontSize: 21, fontWeight: pw.FontWeight.bold))),
         ]);
       }),
     );
