@@ -1,38 +1,41 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:printing/printing.dart';
+import 'package:project_147/division_widget.dart';
 import 'package:pdf/pdf.dart';
 
 import 'package:pdf/widgets.dart' as pw;
-import 'package:project_147/division_widget.dart';
-import 'package:project_147/pdf_generator.dart';
-import 'package:open_file/open_file.dart';
-import 'package:printing/printing.dart';
 
-class FormPage extends StatefulWidget {
+class FormPage extends StatelessWidget {
   const FormPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+    required GlobalKey<FormState> formKey,
+    required this.controllerDate,
+    required this.controllerName,
+    required this.controllerEquipament,
+    required this.controllerSigla,
+    required this.controllerHorimetroInicio,
+    required this.controllerHorimetroFinal,
+    required this.controllerHorarioIni,
+    required this.controllerHorarioFinal,
+    required this.controllerDescri,
+    required this.controllerParaliz,
+  }) : _formKey = formKey;
 
-  @override
-  State<FormPage> createState() => _FormPageState();
-}
-
-class _FormPageState extends State<FormPage> {
-  TextEditingController controllerName = TextEditingController();
-  TextEditingController controllerEquipament = TextEditingController();
-  TextEditingController controllerSigla = TextEditingController();
-  TextEditingController controllerHorimetroInicio = TextEditingController();
-  TextEditingController controllerHorimetroFinal = TextEditingController();
-  TextEditingController controllerHorarioIni = TextEditingController();
-  TextEditingController controllerHorarioFinal = TextEditingController();
-  TextEditingController controllerDate = TextEditingController();
-  TextEditingController controllerDescri = TextEditingController();
-  TextEditingController controllerParaliz = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
-
-  int lenghtTime = 5;
+  final GlobalKey<FormState> _formKey;
+  final TextEditingController controllerDate;
+  final TextEditingController controllerName;
+  final TextEditingController controllerEquipament;
+  final TextEditingController controllerSigla;
+  final TextEditingController controllerHorimetroInicio;
+  final TextEditingController controllerHorimetroFinal;
+  final TextEditingController controllerHorarioIni;
+  final TextEditingController controllerHorarioFinal;
+  final TextEditingController controllerDescri;
+  final TextEditingController controllerParaliz;
 
   @override
   Widget build(BuildContext context) {
@@ -52,14 +55,16 @@ class _FormPageState extends State<FormPage> {
             widthDivison: MediaQuery.of(context).size.width / 2,
           ),
           Padding(
-            padding: const EdgeInsets.all(12.0),
+            padding: const EdgeInsets.all(10.0),
             child: TextFormField(
                 maxLines: 1,
-                keyboardType: TextInputType.datetime,
+                keyboardType: TextInputType.number,
                 maxLength: 10,
                 validator: (value) {
                   if (value != null && value.isEmpty) {
                     return 'Não há informações suficientes';
+                  } else if (value != null && value.characters.contains('/')) {
+                    return 'Insira um separador válido, como: (. ; _ : -). Ex: 22.03.2023';
                   }
                   return null;
                 },
@@ -79,6 +84,7 @@ class _FormPageState extends State<FormPage> {
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: TextFormField(
+                autocorrect: true,
                 maxLines: 1,
                 validator: (value) {
                   if (value != null && value.isEmpty) {
@@ -101,6 +107,7 @@ class _FormPageState extends State<FormPage> {
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: TextFormField(
+                autocorrect: true,
                 maxLines: 1,
                 validator: (value) {
                   if (value != null && value.isEmpty) {
@@ -123,6 +130,7 @@ class _FormPageState extends State<FormPage> {
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: TextFormField(
+                autocorrect: true,
                 maxLines: 1,
                 validator: (value) {
                   if (value != null && value.isEmpty) {
@@ -155,6 +163,7 @@ class _FormPageState extends State<FormPage> {
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: TextFormField(
+                autocorrect: true,
                 maxLines: 1,
                 keyboardType: TextInputType.number,
                 validator: (value) {
@@ -178,6 +187,7 @@ class _FormPageState extends State<FormPage> {
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: TextFormField(
+                autocorrect: true,
                 maxLines: 1,
                 keyboardType: TextInputType.number,
                 validator: (value) {
@@ -211,9 +221,10 @@ class _FormPageState extends State<FormPage> {
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: TextFormField(
+                autocorrect: true,
                 maxLength: 5,
                 maxLines: 1,
-                keyboardType: TextInputType.datetime,
+                keyboardType: TextInputType.text,
                 validator: (value) {
                   if (value != null && value.isEmpty) {
                     return 'Não há informações suficientes';
@@ -235,9 +246,10 @@ class _FormPageState extends State<FormPage> {
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: TextFormField(
+                autocorrect: true,
                 maxLength: 5,
                 maxLines: 1,
-                keyboardType: TextInputType.datetime,
+                keyboardType: TextInputType.text,
                 validator: (value) {
                   if (value != null && value.isEmpty) {
                     return 'Não há informações suficientes';
@@ -274,7 +286,7 @@ class _FormPageState extends State<FormPage> {
                 textDirection: TextDirection.ltr,
                 textAlignVertical: TextAlignVertical.top,
                 autocorrect: true,
-                keyboardType: TextInputType.text,
+                keyboardType: TextInputType.multiline,
                 validator: (value) {
                   if (value != null && value.isEmpty) {
                     return 'Não há informações suficientes';
@@ -306,14 +318,15 @@ class _FormPageState extends State<FormPage> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(12.0),
+            padding:
+                const EdgeInsets.only(top: 12, left: 12, right: 12, bottom: 60),
             child: TextFormField(
                 textAlign: TextAlign.start,
                 maxLines: 10,
                 textDirection: TextDirection.ltr,
                 textAlignVertical: TextAlignVertical.top,
                 autocorrect: true,
-                keyboardType: TextInputType.text,
+                keyboardType: TextInputType.multiline,
                 validator: (value) {
                   if (value != null && value.isEmpty) {
                     return 'Não há informações suficientes';
@@ -336,30 +349,6 @@ class _FormPageState extends State<FormPage> {
           ),
           DivisionWidget(
             widthDivison: MediaQuery.of(context).size.width,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SizedBox(
-              width: 150,
-              height: 50,
-              child: TextButton(
-                  onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
-                      createPdf();
-                    }
-                  },
-                  style: ButtonStyle(
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16))),
-                      side: MaterialStateProperty.all(
-                          const BorderSide(width: 2, color: Colors.black)),
-                      backgroundColor: MaterialStateProperty.all(
-                          const Color.fromARGB(255, 10, 16, 126))),
-                  child: const Text(
-                    'GERAR PDF',
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                  )),
-            ),
           ),
         ],
       )),
