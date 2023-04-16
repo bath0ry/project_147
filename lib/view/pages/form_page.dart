@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:printing/printing.dart';
-import 'package:project_147/division_widget.dart';
+import 'package:project_147/view/widgets/division_widget.dart';
 import 'package:pdf/pdf.dart';
 
 import 'package:pdf/widgets.dart' as pw;
@@ -52,7 +52,7 @@ class FormPage extends StatelessWidget {
             ),
           ),
           DivisionWidget(
-            widthDivison: MediaQuery.of(context).size.width / 2,
+            widthDivison: MediaQuery.of(context).size.width,
           ),
           Padding(
             padding: const EdgeInsets.all(10.0),
