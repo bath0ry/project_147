@@ -548,6 +548,5 @@ class FormPage extends StatelessWidget {
     await file.writeAsBytes(bytes);
 
     OpenFile.open(file.path);
-    print(directory.path);
   }
 }

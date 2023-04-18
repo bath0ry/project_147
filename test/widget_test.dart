@@ -5,26 +5,33 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:open_file/open_file.dart';
+import 'package:project_147/home/home_page.dart';
 
 import 'package:project_147/main.dart';
+import 'package:project_147/view/pages/form_page.dart';
+import 'package:project_147/view/pages/splash_loading_screen.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('Finds FloatingActionButton', (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(
+      home: MyHomePage(),
+    ));
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    expect(find.byType(FloatingActionButton), findsOneWidget);
+  });
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+  testWidgets('SplashScreen have to image asset', (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(
+      home: SplashScreen(),
+    ));
+    await tester.pumpAndSettle();
+    expect(find.byType(Timer), findsOneWidget);
+    await tester.pumpAndSettle();
+    expect(find.byType(CircularProgressIndicator), findsOneWidget);
   });
 }
