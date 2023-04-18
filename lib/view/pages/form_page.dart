@@ -23,6 +23,7 @@ class FormPage extends StatelessWidget {
     required this.controllerHorarioFinal,
     required this.controllerDescri,
     required this.controllerParaliz,
+    required this.controllerObs,
   }) : _formKey = formKey;
 
   final GlobalKey<FormState> _formKey;
@@ -36,6 +37,7 @@ class FormPage extends StatelessWidget {
   final TextEditingController controllerHorarioFinal;
   final TextEditingController controllerDescri;
   final TextEditingController controllerParaliz;
+  final TextEditingController controllerObs;
 
   @override
   Widget build(BuildContext context) {
@@ -348,6 +350,37 @@ class FormPage extends StatelessWidget {
           DivisionWidget(
             widthDivison: MediaQuery.of(context).size.width,
           ),
+          const Padding(
+            padding: EdgeInsets.only(left: 5, top: 10),
+            child: Text(
+              'Observações:',
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
+            ),
+          ),
+          Padding(
+            padding:
+                const EdgeInsets.only(top: 12, left: 12, right: 12, bottom: 60),
+            child: TextFormField(
+                textAlign: TextAlign.start,
+                maxLines: 10,
+                textDirection: TextDirection.ltr,
+                textAlignVertical: TextAlignVertical.top,
+                autocorrect: true,
+                keyboardType: TextInputType.multiline,
+                controller: controllerObs,
+                style: const TextStyle(fontSize: 16, color: Colors.black),
+                decoration: InputDecoration(
+                    hintTextDirection: TextDirection.ltr,
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 17, horizontal: 10),
+                    hintStyle:
+                        const TextStyle(color: Color.fromARGB(255, 73, 73, 73)),
+                    hintText: 'Observações',
+                    hintMaxLines: 10,
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(16)))),
+          ),
         ],
       )),
     );
@@ -357,124 +390,155 @@ class FormPage extends StatelessWidget {
     final pdf = pw.Document();
 
     pdf.addPage(
-      pw.Page(build: (pw.Context context) {
-        return pw
-            .Column(crossAxisAlignment: pw.CrossAxisAlignment.start, children: [
-          pw.Text('DATA: ${controllerDate.text}',
-              style: pw.TextStyle(fontSize: 17, fontWeight: pw.FontWeight.bold),
-              maxLines: 1),
-          pw.SizedBox(height: 21),
-          pw.SizedBox(height: 21),
-          pw.Column(
-            crossAxisAlignment: pw.CrossAxisAlignment.start,
-            children: [
-              pw.Container(
-                  width: 500,
-                  decoration: pw.BoxDecoration(
-                      border: pw.Border.fromBorderSide(pw.BorderSide(
-                          width: 2, style: pw.BorderStyle.solid))),
-                  child: pw.Column(
-                      crossAxisAlignment: pw.CrossAxisAlignment.start,
-                      children: [
-                        pw.SizedBox(height: 21),
-                        pw.Padding(
-                          padding: pw.EdgeInsets.only(left: 10),
-                          child: pw.Text(
-                            'OPERADOR/MOTORISTA: ${controllerName.text}',
-                            style: pw.TextStyle(
-                                fontSize: 14, fontWeight: pw.FontWeight.bold),
-                            maxLines: 1,
-                          ),
-                        ),
-                        pw.SizedBox(height: 5),
-                        pw.Padding(
-                          padding: pw.EdgeInsets.only(left: 10),
-                          child: pw.Text(
-                              'EQUIPAMENTO: ${controllerEquipament.text}',
-                              style: pw.TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: pw.FontWeight.bold)),
-                        ),
-                        pw.SizedBox(height: 5),
-                        pw.Padding(
-                          padding: pw.EdgeInsets.only(left: 10),
-                          child: pw.Text(
-                            'SIGLA DO CONSÓRCIO: ${controllerSigla.text}',
-                            style: pw.TextStyle(
-                                fontSize: 14, fontWeight: pw.FontWeight.bold),
-                            maxLines: 1,
-                          ),
-                        ),
-                        pw.SizedBox(height: 5),
-                        pw.Padding(
-                          padding: pw.EdgeInsets.only(left: 10),
-                          child: pw.Text(
-                            'HORÍMETRO INICIAL: ${controllerHorimetroInicio.text}',
-                            style: pw.TextStyle(
-                                fontSize: 14, fontWeight: pw.FontWeight.bold),
-                            maxLines: 1,
-                          ),
-                        ),
-                        pw.Padding(
-                          padding: pw.EdgeInsets.only(left: 10),
-                          child: pw.Text(
-                            'HORÍMETRO FINAL: ${controllerHorimetroFinal.text}',
-                            style: pw.TextStyle(
-                                fontSize: 14, fontWeight: pw.FontWeight.bold),
-                            maxLines: 1,
-                          ),
-                        ),
-                        pw.SizedBox(height: 5),
-                        pw.Padding(
-                          padding: pw.EdgeInsets.only(left: 10),
-                          child: pw.Text(
-                            'HORÁRIO INICIAL: ${controllerHorarioIni.text}',
-                            style: pw.TextStyle(
-                                fontSize: 14, fontWeight: pw.FontWeight.bold),
-                            maxLines: 1,
-                          ),
-                        ),
-                        pw.Padding(
-                          padding: pw.EdgeInsets.only(left: 10),
-                          child: pw.Text(
-                            'HORÁRIO FINAL: ${controllerHorarioFinal.text}',
-                            style: pw.TextStyle(
-                                fontSize: 14, fontWeight: pw.FontWeight.bold),
-                            maxLines: 1,
-                          ),
-                        ),
-                        pw.SizedBox(height: 16),
-                        pw.Center(
-                            child: pw.Text('DESCRIÇÃO DO SERVIÇO:',
-                                style: pw.TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: pw.FontWeight.bold))),
-                        pw.Padding(
-                          padding: pw.EdgeInsets.only(left: 10, right: 10),
-                          child: pw.Text('${controllerDescri.text}',
-                              style: pw.TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: pw.FontWeight.bold)),
-                        ),
-                        pw.SizedBox(height: 16),
-                        pw.Center(
-                            child: pw.Text('PARALISAÇÃO/DESLOCAMENTO:',
-                                style: pw.TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: pw.FontWeight.bold))),
-                        pw.Padding(
-                          padding: pw.EdgeInsets.only(
-                              left: 10, right: 10, bottom: 10),
-                          child: pw.Text('${controllerParaliz.text}',
-                              style: pw.TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: pw.FontWeight.bold)),
-                        ),
-                      ])),
-            ],
-          ),
-        ]);
-      }),
+      pw.Page(
+          pageFormat: PdfPageFormat.a4,
+          build: (pw.Context context) {
+            return pw.Column(
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                children: [
+                  pw.Text('DATA: ${controllerDate.text}',
+                      style: pw.TextStyle(
+                          fontSize: 17, fontWeight: pw.FontWeight.bold),
+                      maxLines: 1),
+                  pw.SizedBox(height: 16),
+                  pw.Center(
+                    child: pw.Text('CONSÓRCIO SP 147',
+                        style: pw.TextStyle(
+                            fontSize: 20, fontWeight: pw.FontWeight.bold),
+                        maxLines: 1),
+                  ),
+                  pw.SizedBox(height: 16),
+                  pw.Column(
+                    crossAxisAlignment: pw.CrossAxisAlignment.start,
+                    children: [
+                      pw.Container(
+                          width: 500,
+                          decoration: pw.BoxDecoration(
+                              border: pw.Border.fromBorderSide(pw.BorderSide(
+                                  width: 2, style: pw.BorderStyle.solid))),
+                          child: pw.Column(
+                              crossAxisAlignment: pw.CrossAxisAlignment.start,
+                              children: [
+                                pw.SizedBox(height: 19),
+                                pw.Padding(
+                                  padding: pw.EdgeInsets.only(left: 10),
+                                  child: pw.Text(
+                                    'OPERADOR/MOTORISTA: ${controllerName.text}',
+                                    style: pw.TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: pw.FontWeight.bold),
+                                    maxLines: 1,
+                                  ),
+                                ),
+                                pw.SizedBox(height: 5),
+                                pw.Padding(
+                                  padding: pw.EdgeInsets.only(left: 10),
+                                  child: pw.Text(
+                                      'EQUIPAMENTO: ${controllerEquipament.text}',
+                                      style: pw.TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: pw.FontWeight.bold)),
+                                ),
+                                pw.SizedBox(height: 5),
+                                pw.Padding(
+                                  padding: pw.EdgeInsets.only(left: 10),
+                                  child: pw.Text(
+                                    'SIGLA DO CONSÓRCIO: ${controllerSigla.text}',
+                                    style: pw.TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: pw.FontWeight.bold),
+                                    maxLines: 1,
+                                  ),
+                                ),
+                                pw.SizedBox(height: 5),
+                                pw.Padding(
+                                  padding: pw.EdgeInsets.only(left: 10),
+                                  child: pw.Text(
+                                    'HORÍMETRO INICIAL: ${controllerHorimetroInicio.text}',
+                                    style: pw.TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: pw.FontWeight.bold),
+                                    maxLines: 1,
+                                  ),
+                                ),
+                                pw.Padding(
+                                  padding: pw.EdgeInsets.only(left: 10),
+                                  child: pw.Text(
+                                    'HORÍMETRO FINAL: ${controllerHorimetroFinal.text}',
+                                    style: pw.TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: pw.FontWeight.bold),
+                                    maxLines: 1,
+                                  ),
+                                ),
+                                pw.SizedBox(height: 5),
+                                pw.Padding(
+                                  padding: pw.EdgeInsets.only(left: 10),
+                                  child: pw.Text(
+                                    'HORÁRIO INICIAL: ${controllerHorarioIni.text}',
+                                    style: pw.TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: pw.FontWeight.bold),
+                                    maxLines: 1,
+                                  ),
+                                ),
+                                pw.Padding(
+                                  padding: pw.EdgeInsets.only(left: 10),
+                                  child: pw.Text(
+                                    'HORÁRIO FINAL: ${controllerHorarioFinal.text}',
+                                    style: pw.TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: pw.FontWeight.bold),
+                                    maxLines: 1,
+                                  ),
+                                ),
+                                pw.SizedBox(height: 16),
+                                pw.Center(
+                                    child: pw.Text('DESCRIÇÃO DO SERVIÇO:',
+                                        style: pw.TextStyle(
+                                            fontSize: 17,
+                                            fontWeight: pw.FontWeight.bold))),
+                                pw.Padding(
+                                  padding:
+                                      pw.EdgeInsets.only(left: 10, right: 10),
+                                  child: pw.Text('${controllerDescri.text}',
+                                      style: pw.TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: pw.FontWeight.bold)),
+                                ),
+                                pw.SizedBox(height: 16),
+                                pw.Center(
+                                    child: pw.Text('PARALISAÇÃO/DESLOCAMENTO:',
+                                        style: pw.TextStyle(
+                                            fontSize: 17,
+                                            fontWeight: pw.FontWeight.bold))),
+                                pw.Padding(
+                                  padding: pw.EdgeInsets.only(
+                                      left: 10, right: 10, bottom: 10),
+                                  child: pw.Text('${controllerParaliz.text}',
+                                      style: pw.TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: pw.FontWeight.bold)),
+                                ),
+                                pw.SizedBox(height: 16),
+                                pw.Center(
+                                    child: pw.Text('OBSERVAÇÕES:',
+                                        style: pw.TextStyle(
+                                            fontSize: 17,
+                                            fontWeight: pw.FontWeight.bold))),
+                                pw.Padding(
+                                  padding: pw.EdgeInsets.only(
+                                      left: 10, right: 10, bottom: 10),
+                                  child: pw.Text('${controllerObs.text}',
+                                      style: pw.TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: pw.FontWeight.bold)),
+                                ),
+                              ])),
+                    ],
+                  ),
+                ]);
+          }),
     );
 
     final bytes = await pdf.save();

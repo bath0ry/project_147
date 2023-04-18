@@ -33,6 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
   TextEditingController controllerDate = TextEditingController();
   TextEditingController controllerDescri = TextEditingController();
   TextEditingController controllerParaliz = TextEditingController();
+  TextEditingController controllerObs = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -41,18 +42,19 @@ class _MyHomePageState extends State<MyHomePage> {
           onPressed: () {
             if (_formKey.currentState!.validate()) {
               FormPage(
-                      formKey: _formKey,
-                      controllerDate: controllerDate,
-                      controllerName: controllerName,
-                      controllerEquipament: controllerEquipament,
-                      controllerSigla: controllerSigla,
-                      controllerHorimetroInicio: controllerHorimetroInicio,
-                      controllerHorimetroFinal: controllerHorimetroFinal,
-                      controllerHorarioIni: controllerHorarioIni,
-                      controllerHorarioFinal: controllerHorarioFinal,
-                      controllerDescri: controllerDescri,
-                      controllerParaliz: controllerParaliz)
-                  .createPdf();
+                formKey: _formKey,
+                controllerDate: controllerDate,
+                controllerName: controllerName,
+                controllerEquipament: controllerEquipament,
+                controllerSigla: controllerSigla,
+                controllerHorimetroInicio: controllerHorimetroInicio,
+                controllerHorimetroFinal: controllerHorimetroFinal,
+                controllerHorarioIni: controllerHorarioIni,
+                controllerHorarioFinal: controllerHorarioFinal,
+                controllerDescri: controllerDescri,
+                controllerParaliz: controllerParaliz,
+                controllerObs: controllerObs,
+              ).createPdf();
             }
           },
           child: Icon(
@@ -66,16 +68,18 @@ class _MyHomePageState extends State<MyHomePage> {
           backgroundColor: Color.fromARGB(255, 9, 12, 143),
         ),
         body: FormPage(
-            formKey: _formKey,
-            controllerDate: controllerDate,
-            controllerName: controllerName,
-            controllerEquipament: controllerEquipament,
-            controllerSigla: controllerSigla,
-            controllerHorimetroInicio: controllerHorimetroInicio,
-            controllerHorimetroFinal: controllerHorimetroFinal,
-            controllerHorarioIni: controllerHorarioIni,
-            controllerHorarioFinal: controllerHorarioFinal,
-            controllerDescri: controllerDescri,
-            controllerParaliz: controllerParaliz));
+          formKey: _formKey,
+          controllerDate: controllerDate,
+          controllerName: controllerName,
+          controllerEquipament: controllerEquipament,
+          controllerSigla: controllerSigla,
+          controllerHorimetroInicio: controllerHorimetroInicio,
+          controllerHorimetroFinal: controllerHorimetroFinal,
+          controllerHorarioIni: controllerHorarioIni,
+          controllerHorarioFinal: controllerHorarioFinal,
+          controllerDescri: controllerDescri,
+          controllerParaliz: controllerParaliz,
+          controllerObs: controllerObs,
+        ));
   }
 }
