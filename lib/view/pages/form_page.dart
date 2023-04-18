@@ -153,8 +153,7 @@ class FormPage extends StatelessWidget {
           DivisionWidget(
             widthDivison: MediaQuery.of(context).size.width,
           ),
-          const Padding(
-            padding: EdgeInsets.only(right: 300, top: 10),
+          Center(
             child: Text(
               'Horímetro',
               style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
@@ -211,8 +210,7 @@ class FormPage extends StatelessWidget {
           DivisionWidget(
             widthDivison: MediaQuery.of(context).size.width,
           ),
-          const Padding(
-            padding: EdgeInsets.only(right: 300, top: 10),
+          Center(
             child: Text(
               'Horário',
               style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
@@ -357,8 +355,6 @@ class FormPage extends StatelessWidget {
 
   Future<void> createPdf() async {
     final pdf = pw.Document();
-    final netImage = await networkImage(
-        'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiwpsmcBtOfljvWY-MMXf1lPLYkLJ-144ZHSEdtbP0LTArVAem1nFD_CV2LZUsfNxvwPSXMBSFAauNIEOlRxXkzbLtJfcFMtFGjHVM3US22nUHYrYXmHQOQrDGpQaZx50LXUdRriHWbBbDkx4cIW505ei8Q7uXbdzK8eDAyMUx4orTByet_jyrY25CXPQ/s593/WhatsApp%20Image%202023-04-11%20at%2021.13.11.jpeg');
 
     pdf.addPage(
       pw.Page(build: (pw.Context context) {
@@ -368,9 +364,6 @@ class FormPage extends StatelessWidget {
               style: pw.TextStyle(fontSize: 17, fontWeight: pw.FontWeight.bold),
               maxLines: 1),
           pw.SizedBox(height: 21),
-          pw.Center(
-            child: pw.Image(netImage, width: 350, height: 350),
-          ),
           pw.SizedBox(height: 21),
           pw.Column(
             crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -485,11 +478,12 @@ class FormPage extends StatelessWidget {
     );
 
     final bytes = await pdf.save();
-    final directory = await getApplicationDocumentsDirectory();
+    final directory = await getApplicationSupportDirectory();
     final file = File(
         '${directory.path}/${controllerName.text + controllerDate.text}.pdf');
     await file.writeAsBytes(bytes);
 
     OpenFile.open(file.path);
+    print(directory.path);
   }
 }
