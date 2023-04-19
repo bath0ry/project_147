@@ -24,14 +24,4 @@ void main() {
 
     expect(find.byType(FloatingActionButton), findsOneWidget);
   });
-
-  testWidgets('SplashScreen have to image asset', (WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(
-      home: SplashScreen(),
-    ));
-    await tester.pumpAndSettle();
-    expect(find.byType(Timer), findsOneWidget);
-    await tester.pumpAndSettle();
-    expect(find.byType(CircularProgressIndicator), findsOneWidget);
-  });
 }

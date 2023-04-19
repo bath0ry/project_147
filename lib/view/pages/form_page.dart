@@ -7,6 +7,9 @@ import 'package:printing/printing.dart';
 import 'package:project_147/view/widgets/division_widget.dart';
 import 'package:pdf/pdf.dart';
 
+import 'dart:typed_data';
+import 'package:flutter/services.dart' show rootBundle;
+
 import 'package:pdf/widgets.dart' as pw;
 
 class FormPage extends StatelessWidget {
@@ -60,13 +63,15 @@ class FormPage extends StatelessWidget {
             padding: const EdgeInsets.all(10.0),
             child: TextFormField(
                 maxLines: 1,
-                keyboardType: TextInputType.number,
+                keyboardType: TextInputType.text,
                 maxLength: 10,
                 validator: (value) {
                   if (value != null && value.isEmpty) {
                     return 'Não há informações suficientes';
                   } else if (value != null && value.characters.contains('/')) {
-                    return 'Insira um separador válido, como: (. ; _ : -). Ex: 22.03.2023';
+                    return 'Insira um separador válido,(. ; _ : -).Ex: 22.03.2023';
+                  } else if (value != null && value.length < 10) {
+                    return 'Não há informações suficientes';
                   }
                   return null;
                 },
