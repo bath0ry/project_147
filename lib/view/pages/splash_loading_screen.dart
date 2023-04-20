@@ -40,19 +40,21 @@ class _SplashScreenState extends State<SplashScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  'Sua Parte Diária',
-                  style: TextStyle(
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      fontSize: 45,
-                      fontWeight: FontWeight.w900,
-                      shadows: [
-                        Shadow(
-                            offset: Offset(1, 6),
-                            blurRadius: 1,
-                            color: Color.fromARGB(255, 86, 86, 87))
-                      ],
-                      fontStyle: FontStyle.italic),
+                FittedBox(
+                  child: Text(
+                    'Sua Parte Diária',
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        fontSize: 35,
+                        fontWeight: FontWeight.w900,
+                        shadows: [
+                          Shadow(
+                              offset: Offset(1, 6),
+                              blurRadius: 1,
+                              color: Color.fromARGB(255, 86, 86, 87))
+                        ],
+                        fontStyle: FontStyle.italic),
+                  ),
                 ),
                 SizedBox(
                   height: 30,
